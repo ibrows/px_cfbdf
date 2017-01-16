@@ -105,18 +105,21 @@ class CodeshipFeatureBranchDirectoryFinder {
 
     $finder = new Finder();
     $finder->depth('< 2');
-    $finder->in($this->modulePath)
-           ->directories()
-           ->path($ciBranch);
-    $file = $this->getFirstDir($finder);
+    try {
+      $finder->in($this->modulePath)
+             ->directories()
+             ->path($ciBranch);
+      $file = $this->getFirstDir($finder);
+    } catch (\Exception $e) {
+      $this->throwRuntimeException($ciBranch);
+    }
 
     if ($file === NULL) {
       //returning 1 here is an error code and will fail the build
       if ($this->softFail) {
         return $this->getSoftFailPath();
       }
-      throw new \RuntimeException('cannot find folder ' . $this->modulePath .
-                                  '/*/*/' . $ciBranch);
+      $this->throwRuntimeException($ciBranch);
     }
 
     return $file->getRealPath();
@@ -124,9 +127,20 @@ class CodeshipFeatureBranchDirectoryFinder {
   }
 
   /**
+   * @param string $ciBranch
+   *
+   * @throws \RuntimeException
+   */
+  private function throwRuntimeException($ciBranch) {
+    throw new \RuntimeException('cannot find folder ' . $this->modulePath .
+                                '/*/*/' . $ciBranch);
+  }
+
+  /**
    * @return string
    */
-  protected function getSoftFailPath() {
+  protected
+  function getSoftFailPath() {
 
     $finder = new Finder();
     $finder->depth('== 0');
@@ -145,7 +159,8 @@ class CodeshipFeatureBranchDirectoryFinder {
    *
    * @return mixed
    */
-  protected function getFirstDir(Finder $finder) {
+  protected
+  function getFirstDir(Finder $finder) {
     //get first occurance only
     $iterator = $finder->getIterator();
     $iterator->rewind();
