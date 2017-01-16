@@ -14,6 +14,28 @@ use Px\CodeshipFeatureBranchDirectoryFinder\CodeshipFeatureBranchDirectoryFinder
 
 class CodeshipFeatureBranchDirectoryFinderTest extends \PHPUnit_Framework_TestCase {
 
+  protected $dirs = [];
+
+  public function __construct($name = NULL, array $data = [], $dataName = '') {
+    parent::__construct($name, $data, $dataName);
+    $assetPrefix = __DIR__.'/assets';
+    $this->dirs = [$assetPrefix ,$assetPrefix.'/module_dir',$assetPrefix.'/soft_suffix'];
+  }
+
+  protected function setUp() {
+    parent::setUp();
+    foreach ($this->dirs as $dir) {
+      @mkdir($dir);
+    }
+  }
+
+  protected function tearDown() {
+    parent::tearDown();
+    foreach (array_reverse($this->dirs) as $dir) {
+      @rmdir($dir);
+    }
+  }
+
   /**
    * @expectedException \RuntimeException
    */
