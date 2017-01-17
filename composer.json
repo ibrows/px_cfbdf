@@ -1,4 +1,15 @@
 {
+    "name": "px/codeship_feature_branch_helpers",
+    "description": "Some classes to help work out what set of tests to run on a feature branch in codeship",
+    "license": "GPL-2.0+",
+    "authors": [
+        {
+            "name": "Tom Whiston",
+            "email": "tom.whiston@pwc-digital.ch",
+            "role": "Developer"
+        }
+    ],
+    "bin": ["bin/cfbdf", "bin/cfbgf"],
     "require": {
         "symfony/finder": "^3.2"
     },
