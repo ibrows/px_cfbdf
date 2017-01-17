@@ -105,6 +105,7 @@ class CodeshipFeatureBranchDirectoryFinder {
 
     $finder = new Finder();
     $finder->depth('< 2');
+    $file = NULL;
     try {
       $finder->in($this->modulePath)
              ->directories()
@@ -139,8 +140,7 @@ class CodeshipFeatureBranchDirectoryFinder {
   /**
    * @return string
    */
-  protected
-  function getSoftFailPath() {
+  protected function getSoftFailPath() {
 
     $finder = new Finder();
     $finder->depth('== 0');
@@ -159,8 +159,7 @@ class CodeshipFeatureBranchDirectoryFinder {
    *
    * @return mixed
    */
-  protected
-  function getFirstDir(Finder $finder) {
+  private function getFirstDir(Finder $finder) {
     //get first occurance only
     $iterator = $finder->getIterator();
     $iterator->rewind();
