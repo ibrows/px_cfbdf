@@ -6,7 +6,17 @@
  * Time: 10:04
  */
 
-include __DIR__ . '/../vendor/autoload.php';
+$paths = [
+	__DIR__.'/../autoload.php', // bin folder
+    __DIR__.'/../vendor/autoload.php', // locally
+    __DIR__.'/../../../autoload.php' // dependency
+];
+foreach ($paths as $path) {
+    if (file_exists($path)) {
+        require_once $path;
+        break;
+    }
+}
 
 $f = new \Px\CodeshipFeatureBranchDirectoryFinder\CodeshipFeatureBranchDirectoryFinder();
 $dir = $f->divine(getenv('CI_BRANCH'));

@@ -11,7 +11,7 @@
     ],
     "bin": ["bin/cfbdf", "bin/cfbgf"],
     "require": {
-        "symfony/finder": "^3.2"
+        "symfony/finder": "*"
     },
     "autoload": {
         "psr-4" : {
