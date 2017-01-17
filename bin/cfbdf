@@ -10,4 +10,4 @@ include __DIR__ . '/../vendor/autoload.php';
 
 $f = new \Px\CodeshipFeatureBranchDirectoryFinder\CodeshipFeatureBranchDirectoryFinder();
 $dir = $f->divine(getenv('CI_BRANCH'));
-putenv('FEATURE_DIR=' . $dir);
+echo 'PHPUNIT_DIR=' . $dir;
