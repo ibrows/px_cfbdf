@@ -1,3 +1,4 @@
+#!/usr/bin/env php
 <?php
 /**
  * Created by PhpStorm.
@@ -18,5 +19,4 @@ foreach ($paths as $path) {
 }
 
 $f = new \Px\CodeshipFeatureBranchDirectoryFinder\CodeshipFeatureBranchGroupFinder();
-$dir = $f->divine(getenv('CI_BRANCH'));
-echo "PHPUNIT_GROUP=".$dir;
+echo $f->divine(getenv('CI_BRANCH'));
