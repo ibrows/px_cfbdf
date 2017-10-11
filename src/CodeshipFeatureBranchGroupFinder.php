@@ -41,7 +41,10 @@ class CodeshipFeatureBranchGroupFinder {
    * @throws \RuntimeException
    */
   public function divine(string $ciBranch) {
-    return str_replace($this->moduleNamePrefix, '', $ciBranch);
+    $branch = str_replace($this->moduleNamePrefix, '', $ciBranch);
+
+    // Returns the branch name without the ticket number if in the format 111__featurename.
+    return preg_replace('(^\d+__|^)', '', $branch);
   }
 
 }
