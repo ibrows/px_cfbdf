@@ -20,4 +20,6 @@ foreach ($paths as $path) {
 }
 
 $f = new \Px\CodeshipFeatureBranchDirectoryFinder\CodeshipFeatureBranchDirectoryFinder();
-echo $f->divine(getenv('CI_BRANCH'));
+$gf = new \Px\CodeshipFeatureBranchDirectoryFinder\CodeshipFeatureBranchGroupFinder();
+
+echo $f->divine($gf->divine(getenv('CI_BRANCH')));
