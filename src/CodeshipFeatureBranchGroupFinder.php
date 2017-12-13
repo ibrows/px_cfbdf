@@ -43,8 +43,10 @@ class CodeshipFeatureBranchGroupFinder {
   public function divine(string $ciBranch) {
     $branch = str_replace($this->moduleNamePrefix, '', $ciBranch);
 
-    // Returns the branch name without the ticket number if in the format 111__featurename.
-    return preg_replace('(^\d+__|^)', '', $branch);
+    // Returns the branch name without the ticket number if in the format ticket_featurename.
+    // Ticket identifiers contain only letters, numbers and hyphens.
+    // Ticket and feature names are divided by at least one underscore.
+    return preg_replace('/^[a-zA-Z\d-]+_+/', '', $branch);
   }
 
 }
